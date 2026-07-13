@@ -1,0 +1,66 @@
+<html lang="pt-br"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Motivo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="body">
+    <!--cabeçalho-->
+    <div class="head">
+        <h1>Selecionar Motivo</h1>
+    </div>
+    <!--Botões Paradas-->
+    <div class="b-parada">
+        <div class="b"><input type="radio" id="parada-1" name="motivo_parada" value="1" data-descricao="GARRAFA TRANCADA"><label for="parada-1">Garrafa Trancada</label></div>
+        <div class="b"><input type="radio" id="parada-2" name="motivo_parada" value="2" data-descricao="FALTA DE ENERGIA ELÉTRICA"><label for="parada-2">Falta De Energia Elétrica</label></div>
+        <div class="b"><input type="radio" id="parada-3" name="motivo_parada" value="3" data-descricao="TROCA DE VARETA"><label for="parada-3">Troca De Vareta</label></div>
+        <div class="b"><input type="radio" id="parada-4" name="motivo_parada" value="4" data-descricao="FALHA NA VÁLVULA DE SOPRO"><label for="parada-4">Falha Na Válvula De Sopro</label></div>
+        <div class="b"><input type="radio" id="parada-5" name="motivo_parada" value="5" data-descricao="MÁQUINA QUEBRADA"><label for="parada-5">Máquina Quebrada</label></div>
+        <div class="b"><input type="radio" id="parada-6" name="motivo_parada" value="6" data-descricao="PREFORMA TRANCADA"><label for="parada-6">Preforma Trancada</label></div>
+        <div class="b"><input type="radio" id="parada-7" name="motivo_parada" value="7" data-descricao="FALTA OPERADOR"><label for="parada-7">Falta Operador</label></div>
+        <div class="b"><input type="radio" id="parada-8" name="motivo_parada" value="8" data-descricao="ERRO NA PRENSA"><label for="parada-8">Erro Na Prensa</label></div>
+        <div class="b"><input type="radio" id="parada-9" name="motivo_parada" value="9" data-descricao="FALHA ENSACADEIRA"><label for="parada-9">Falha Ensacadeira</label></div>
+        <div class="b"><input type="radio" id="parada-10" name="motivo_parada" value="10" data-descricao="PREFORMA BOCA TORTA"><label for="parada-10">Preforma Boca Torta</label></div>
+        <div class="b"><input type="radio" id="parada-11" name="motivo_parada" value="11" data-descricao="INTERVALO ALMOÇO"><label for="parada-11">Intervalo Almoço</label></div>
+        <div class="b"><input type="radio" id="parada-12" name="motivo_parada" value="12" data-descricao="INTERVALO JANTA"><label for="parada-12">Intervalo Janta</label></div>
+        <div class="b"><input type="radio" id="parada-13" name="motivo_parada" value="13" data-descricao="LÂMPADA QUEBRADA / QUEIMADA"><label for="parada-13">Lâmpada Quebrada / Queimada</label></div>
+        <div class="b"><input type="radio" id="parada-14" name="motivo_parada" value="14" data-descricao="TROCA DE MOLDE"><label for="parada-14">Troca De Molde</label></div>
+        <div class="b"><input type="radio" id="parada-15" name="motivo_parada" value="15" data-descricao="MANUTENÇÃO ELÉTRICA"><label for="parada-15">Manutenção Elétrica</label></div>
+        <div class="b"><input type="radio" id="parada-16" name="motivo_parada" value="16" data-descricao="LIMPEZA"><label for="parada-16">Limpeza</label></div>
+        <div class="b"><input type="radio" id="parada-17" name="motivo_parada" value="17" data-descricao="PREFORMA BOCA ESTOURADA"><label for="parada-17">Preforma Boca Estourada</label></div>
+        <div class="b"><input type="radio" id="parada-18" name="motivo_parada" value="18" data-descricao="PROBLEMA NA ROTULADEIRA"><label for="parada-18">Problema Na Rotuladeira</label></div>
+        <div class="b"><input type="radio" id="parada-19" name="motivo_parada" value="19" data-descricao="FALTA ABASTECIMENTO"><label for="parada-19">Falta Abastecimento</label></div>
+        <div class="b"><input type="radio" id="parada-20" name="motivo_parada" value="20" data-descricao="MANUTENÇÃO MECÂNICA"><label for="parada-20">Manutenção Mecânica</label></div>
+        <div class="b"><input type="radio" id="parada-21" name="motivo_parada" value="21" data-descricao="DEFEITO NA PREFORMA"><label for="parada-21">Defeito Na Preforma</label></div>
+        <div class="b"><input type="radio" id="parada-22" name="motivo_parada" value="22" data-descricao="FALHA NA PINÇA"><label for="parada-22">Falha Na Pinça</label></div>
+        <div class="b"><input type="radio" id="parada-23" name="motivo_parada" value="23" data-descricao="INTERVALO CAFÉ"><label for="parada-23">Intervalo Café</label></div>
+        <div class="b"><input type="radio" id="parada-24" name="motivo_parada" value="24" data-descricao="ERRO NA RÉGUA"><label for="parada-24">Erro Na Régua</label></div>
+        <div class="b"><input type="radio" id="parada-25" name="motivo_parada" value="25" data-descricao="GARRAFA ESTOURADA"><label for="parada-25">Garrafa Estourada</label></div>
+    </div>
+    <div class="b-space">
+    <a href="index.html" style="text-decoration: none;"><div class="back"><h1>Voltar</h1></div></a>
+    <button type="button" id="btn-selecionar" class="send">Selecionar</button>
+
+<script>
+    document.getElementById('btn-selecionar').addEventListener('click', function() {
+        const opcaoSelecionada = document.querySelector('input[name="motivo_parada"]:checked');
+
+        if (!opcaoSelecionada) {
+            alert("Selecione uma parada antes de continuar.");
+            return;
+        }
+
+        const codigoParada = opcaoSelecionada.value;
+        const descricaoParada = opcaoSelecionada.getAttribute('data-descricao');
+
+        // Salva o motivo selecionado para o formulário principal usar
+        localStorage.setItem('parada_codigo', codigoParada);
+        localStorage.setItem('parada_descricao', descricaoParada);
+
+        // Volta para o formulário principal
+        window.location.href = "index.html"; // ajuste o nome do arquivo do formulário principal se for diferente
+    });
+</script>
+
+</body>
+</html>

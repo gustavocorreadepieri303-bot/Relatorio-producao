@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Produção</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="body">
+
+    <div id="meu-modal-refugo" class="modal-refugo" style="display:none;">
+        <form id="form-refugo" onsubmit="enviarRefugo(event)">
+            <div class="modal-conteudo">
+                <h2>Refugos</h2>
+                <label for="input-refugo">KG de Refugo Garrafa:</label>
+                <input type="text" id="input-refugo-grf" name="quantidade_refugo_grf" min="0" required>
+                <label for="input-refugo">KG de Refugo Preforma:</label>
+                <input type="text" id="input-refugo-prf" name="quantidade_refugo_prf" min="0" required>
+                <label for="input-turno-refugo">Turno:</label>
+                <select id="input-turno-refugo" name="turno_refugo" required>
+                    <option value="">-- Selecione o Turno --</option>
+                    <option value="A">Turno A</option>
+                    <option value="B">Turno B</option>
+                    <option value="C">Turno C</option>
+                    <option value="D">Turno D</option>
+                </select>
+                <div class="b-space">
+                    <button type="button" class="modal-btn" onclick="fecharModalRefugo()">Cancelar</button>
+                    <button type="submit" class="modal-btn">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="head">
+        <h1>Relatório De Produção</h1>
+    </div>
+    
+    <form id="form-produção" onsubmit="enviarParaPlanilha(event)" oninput="salvarRascunhoCampos()">
+
+        <div class="input-garrafa">
+            <div class="campo-grupo">
+                <label for="select-Linha">Linha:</label>
+                <select id="select-Linha" name="linha" required="">
+                    <option value="">-- Selecione a Linha --</option>
+                    <option value="Linha 1">Linha 1</option>
+                    <option value="Linha 2">Linha 2</option>
+                    <option value="Linha 3">Linha 3</option>
+                    <option value="Linha 4">Linha 4</option>
+                    <option value="Linha 5">Linha 5</option>
+                    <option value="Linha 6">Linha 6</option>
+                    <option value="Linha 7">Linha 7</option>
+                    <option value="Linha 8">Linha 8</option>
+                    <option value="Linha 9">Linha 9</option>
+                    <option value="Linha 10">Linha 10</option>
+                    <option value="Linha 11">Linha 11</option>
+                    <option value="Linha 12">Linha 12</option>
+                    <option value="Linha 14">Linha 14</option>
+                </select>
+                <label for="select-turno">Turno:</label>
+                <select id="select-turno" name="turno_trabalho" required="">
+                    <option value="">-- Selecione o Turno --</option>
+                    <option value="A">Turno A</option>
+                    <option value="B">Turno B</option>
+                    <option value="C">Turno C</option>
+                    <option value="D">Turno D</option>
+                </select>
+            </div>
+            <input type="text" id="input-garrafa" name="input-garrafa" placeholder="Nome da garrafa" required="">
+            <input type="text" id="input-preforma" name="quantidade_preforma" placeholder="Número da Preforma" required="">
+            <input type="text" id="input-lote-preforma" name="input-lote-preforma" placeholder="Lote da preforma" required="">
+            <div class="realizado">
+                <label for="realizado_por">Realizado Por:</label>
+                <input type="text" id="input-name" name="realizado_por" placeholder="Equipe. Ex: A1" required="">
+            </div>
+        </div>
+
+        <div class="info-space">
+            <div id="grupo-quantidades" class="linha-info">
+                <input type="text" id="input-qntd-p-fardo" name="qntd-p-fardo" placeholder="Quantidade de Garrafas por Fardo" required="">
+                <input type="text" id="input-qntd-fardo" name="qntd-fardo" placeholder="Quantidade de Fardos Produzidos" required="">
+            </div>
+            <div id="grupo-motivo-parada" class="linha-info" style="display:none;">
+                <input type="text" id="input-motivo-parada" name="motivo_parada_texto" readonly>
+                <input type="hidden" id="input-motivo-codigo" name="defeito_selected" value="">
+                <span id="btn-limpar-motivo" title="Remover parada" style="cursor:pointer;">✕</span>
+            </div>
+            <div class="linha-info">
+                <div class="linha-horario">
+                    <label for="input-das">Das:</label>
+                    <input type="time" id="input-das" name="hora_das" readonly required="">
+                </div>
+                <div class="linha-horario">
+                    <label for="input-ate">Até:</label>
+                    <input type="time" id="input-ate" name="hora_ate" required="">
+                </div>
+            </div>
+        </div>
+
+        <div class="b-space">
+            <button type="button" class="back" onclick="abrirModalRefugo()"><h1>Refugos</h1></button>
+            <a href="selecionar_motivo.html" style="text-decoration: none;"><div class="back"><h1>Parada</h1></div></a>
+            <button type="submit" class="send">Enviar</button>
+        </div>
+    </form>
+
+<script>
+    // ===================================================================
+    // ⚠️ AJUSTE AQUI: URL do Apps Script publicado
+    // ===================================================================
+    var URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzjaXrfzcFEDvrf-auAizsEtl0TroOkfTRsLTho3TFElpJ9dhLrboWbVlhB8NA5agl_/exec";
+
+    // ===================================================================
+    // MODAL REFUGO
+    // ===================================================================
+    function abrirModalRefugo() {
+        document.getElementById('meu-modal-refugo').style.display = 'flex';
+    }
+
+    function fecharModalRefugo() {
+        document.getElementById('meu-modal-refugo').style.display = 'none';
+        document.getElementById('form-refugo').reset();
+    }
+
+    function enviarRefugo(event) {
+        event.preventDefault();
+
+        const linha       = document.getElementById('select-Linha').value;
+        const equipe      = document.getElementById('input-name').value;
+        const kgRefugoGrf = document.getElementById('input-refugo-grf').value;
+        const kgRefugoPrf = document.getElementById('input-refugo-prf').value; 
+        const turno       = document.getElementById('input-turno-refugo').value;
+
+        const corpo = new URLSearchParams();
+        corpo.append("tipo",               "refugo");
+        corpo.append("linha",              linha);
+        corpo.append("realizado_por",      equipe);
+        corpo.append("quantidade_refugo_grf",  kgRefugoGrf);
+        corpo.append("quantidade_refugo_prf",  kgRefugoPrf);
+        corpo.append("turno_refugo",       turno);
+
+        const botao = event.submitter;
+        botao.innerText = "Enviando...";
+        botao.disabled = true;
+
+        fetch(URL_SCRIPT, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: corpo.toString()
+        })
+        .then(() => {
+            alert("Refugo registrado com sucesso!");
+            fecharModalRefugo();
+            botao.innerText = "Enviar";
+            botao.disabled = false;
+        })
+        .catch(() => {
+            alert("Erro de conexão. Tente novamente.");
+            botao.innerText = "Enviar";
+            botao.disabled = false;
+        });
+    }
+
+    // ===================================================================
+    // LÓGICA DE HORÁRIO ENCADEADO (Das / Até)
+    // ===================================================================
+    const HORARIO_INICIO_MANHA = "05:00";
+    const HORARIO_INICIO_TARDE = "17:00";
+
+    const selectTurno = document.getElementById('select-turno');
+    const inputDas = document.getElementById('input-das');
+    const inputAte = document.getElementById('input-ate');
+
+    function horarioInicialDoTurno(turno) {
+        return (turno === "A" || turno === "B") ? HORARIO_INICIO_MANHA : HORARIO_INICIO_TARDE;
+    }
+
+    function resetarParaNovoTurno(turno) {
+        inputDas.value = horarioInicialDoTurno(turno);
+        inputAte.value = "";
+        salvarRascunhoCampos();
+    }
+
+    selectTurno.addEventListener('change', function() {
+        if (this.value) {
+            resetarParaNovoTurno(this.value);
+        } else {
+            inputDas.value = "";
+            inputAte.value = "";
+            salvarRascunhoCampos();
+        }
+    });
+
+    function avancarHorarioAposEnvio() {
+        if (inputAte.value) {
+            inputDas.value = inputAte.value;
+            inputAte.value = "";
+        }
+        salvarRascunhoCampos();
+    }
+
+    // ===================================================================
+    // PERSISTÊNCIA DO FORMULÁRIO (localStorage)
+    // ===================================================================
+    const CHAVE_RASCUNHO = "rascunho_relatorio_producao";
+
+    const camposPersistentes = [
+        "select-Linha",
+        "select-turno",
+        "input-garrafa",
+        "input-lote-preforma",
+        "input-name",
+        "input-qntd-p-fardo",
+        "input-qntd-fardo",
+        "input-das",
+        "input-ate",
+        "input-motivo-parada",
+        "input-motivo-codigo",
+        "input-preforma"
+        
+    ];
+
+    function salvarRascunhoCampos() {
+        const rascunho = {};
+        camposPersistentes.forEach(function(id) {
+            const elemento = document.getElementById(id);
+            if (elemento) rascunho[id] = elemento.value;
+        });
+        localStorage.setItem(CHAVE_RASCUNHO, JSON.stringify(rascunho));
+    }
+
+    function restaurarRascunhoCampos() {
+        const dadosSalvos = localStorage.getItem(CHAVE_RASCUNHO);
+        if (!dadosSalvos) return;
+        try {
+            const rascunho = JSON.parse(dadosSalvos);
+            camposPersistentes.forEach(function(id) {
+                const elemento = document.getElementById(id);
+                if (elemento && rascunho[id] !== undefined) {
+                    elemento.value = rascunho[id];
+                }
+            });
+        } catch (erro) {
+            console.error("Erro ao restaurar rascunho:", erro);
+        }
+    }
+
+    function limparRascunhoCampos() {
+        localStorage.removeItem(CHAVE_RASCUNHO);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        restaurarRascunhoCampos();
+        verificarMotivoParadaSelecionado();
+        // Restaura visibilidade do grupo de motivo se havia um salvo
+        const motivoSalvo = document.getElementById('input-motivo-parada').value;
+        if (motivoSalvo) {
+            grupoQuantidades.style.display = 'none';
+            grupoMotivoParada.style.display = 'flex';
+            inputQntdPFardo.required = false;
+            inputQntdFardo.required = false;
+        }
+    });
+
+    // ===================================================================
+    // INTEGRAÇÃO COM TELA DE SELECIONAR MOTIVO
+    // ===================================================================
+    const grupoQuantidades  = document.getElementById('grupo-quantidades');
+    const grupoMotivoParada = document.getElementById('grupo-motivo-parada');
+    const inputMotivoParada = document.getElementById('input-motivo-parada');
+    const inputMotivoCodigo = document.getElementById('input-motivo-codigo');
+    const inputQntdPFardo   = document.getElementById('input-qntd-p-fardo');
+    const inputQntdFardo    = document.getElementById('input-qntd-fardo');
+
+    function verificarMotivoParadaSelecionado() {
+        const codigoSalvo    = localStorage.getItem('parada_codigo');
+        const descricaoSalva = localStorage.getItem('parada_descricao');
+        if (codigoSalvo && descricaoSalva) {
+            grupoQuantidades.style.display  = 'none';
+            grupoMotivoParada.style.display = 'flex';
+            inputMotivoParada.value = descricaoSalva;
+            inputMotivoCodigo.value = codigoSalvo;
+            inputQntdPFardo.required = false;
+            inputQntdFardo.required  = false;
+            localStorage.removeItem('parada_codigo');
+            localStorage.removeItem('parada_descricao');
+            salvarRascunhoCampos();
+        }
+    }
+
+    document.getElementById('btn-limpar-motivo').addEventListener('click', function() {
+        grupoMotivoParada.style.display = 'none';
+        grupoQuantidades.style.display  = 'flex';
+        inputMotivoParada.value = '';
+        inputMotivoCodigo.value = '';
+        inputQntdPFardo.required = true;
+        inputQntdFardo.required  = true;
+        salvarRascunhoCampos();
+    });
+
+    // ===================================================================
+    // ENVIO DE PRODUÇÃO PARA A PLANILHA
+    // ===================================================================
+    function enviarParaPlanilha(event) {
+        event.preventDefault();
+
+        const linha        = document.getElementById('select-Linha').value;
+        const turno        = document.getElementById('select-turno').value;
+        const realizadoPor = document.getElementById('input-name').value;
+        const garrafa      = document.getElementById('input-garrafa').value;
+        const lotePreforma = document.getElementById('input-lote-preforma').value;
+        const horasDas     = document.getElementById('input-das').value;
+        const horasAte     = document.getElementById('input-ate').value;
+        const qntdFardo    = document.getElementById('input-qntd-fardo').value;
+        const qntdPFardo   = document.getElementById('input-qntd-p-fardo').value;
+        const codigoParada = document.getElementById('input-motivo-codigo').value;
+        const preforma     = document.getElementById('input-preforma').value;
+
+        if (!linha || !turno || !realizadoPor || !horasDas || !horasAte) {
+            alert("Preencha todos os campos obrigatórios.");
+            return;
+        }
+
+        const corpo = new URLSearchParams();
+        corpo.append("tipo",             "producao");
+        corpo.append("linha",            linha);
+        corpo.append("turno_trabalho",  turno);
+        corpo.append("realizado_por",   realizadoPor);
+        corpo.append("nome_garrafa",    garrafa);
+        corpo.append("lote_preforma",   lotePreforma); // Este é o lote real!
+        corpo.append("preforma",        preforma);     // <-- LINHA ADICIONADA: Agora o número da preforma é enviado!
+        corpo.append("hora_das",        horasDas);
+        corpo.append("hora_ate",        horasAte);
+        corpo.append("qntd-fardo",      qntdFardo);
+        corpo.append("qntd-p-fardo",    qntdPFardo);
+        corpo.append("defeito_selected", codigoParada);
+
+        const botao = document.querySelector('.send');
+        botao.innerText = "Enviando...";
+        botao.disabled = true;
+
+        fetch(URL_SCRIPT, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: corpo.toString()
+        })
+        .then(() => {
+            alert("Registrado com sucesso!");
+            avancarHorarioAposEnvio();
+            if (codigoParada) {
+                document.getElementById('btn-limpar-motivo').click();
+            }
+            botao.innerText = "Enviar";
+            botao.disabled = false;
+        })
+        .catch(() => {
+            alert("Erro de conexão. Tente novamente.");
+            botao.innerText = "Enviar";
+            botao.disabled = false;
+        });
+    }
+</script>
+
+</body>
+</html>

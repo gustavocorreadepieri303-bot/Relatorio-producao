@@ -1,0 +1,363 @@
+.body {
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/*cabeçalho*/
+.head {
+    height: auto;
+    min-height: 10%;
+    width: 95%;
+    max-width: 1395px;
+    padding: 15px;
+    outline-width: 10px;
+    outline-style: outset;
+    border-radius: 25px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.head h1 {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    font-size: 35px;
+    text-align: center;
+}
+
+.head a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    max-width: 150px; /* Garante tamanho idêntico para os dois links */
+}
+
+/*botão individual*/
+.b {
+    display: flex;
+    width: 200px; 
+    margin: 0; 
+    height: 70px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    outline-style: outset;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.b input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.b label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #000;
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.b input[type="radio"]:checked + label {
+  background-color: rgb(210, 210, 210);
+  border-color: #0056b3;
+}
+
+.info-space {
+    height: auto;
+    min-height: 100px;
+    width: 95%;
+    max-width: 1395px;
+    margin: 20px auto;
+    border-radius: 10px;
+    outline-style: outset;
+    background-color: antiquewhite;
+    padding: 25px;
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.info-space a {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+/*botão enviar*/
+.send {
+    margin: 0; 
+    width: 100%;
+    max-width: 300px;
+    height: 70px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    outline-style: outset;
+    outline-width: 2px;
+    outline-color: black;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 35px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/*botão voltar*/
+.back {
+    margin: 0; 
+    width: 100%;
+    max-width: 300px;
+    height: 70px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    outline-style: outset;
+    outline-color: black;
+    align-items: center;    
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/*área botões Voltar e Enviar - CORRIGIDO: Centraliza a dupla de botões perfeitamente no tablet */
+.b-space {
+    height: auto;
+    width: 95%;
+    max-width: 1395px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    gap: 60px; /* Ajustado para manter um espaçamento limpo entre Voltar e Enviar */
+    justify-content: center;
+    align-items: center;
+}
+
+.b-space a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px; /* Garante tamanho idêntico para os dois links */
+}
+
+/*área garrafa e preforma*/
+.input-garrafa {
+    width: 95%;
+    max-width: 1395px;
+    margin: 20px auto;
+    height: auto;
+    padding: 25px;
+    background-color: antiquewhite;
+    margin-top: 20px;
+    align-items: center;
+    border-radius: 15px;
+    outline-style: outset;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    gap: 40px;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+#input-qntd-fardo, #input-qntd-p-fardo, #input-name, #input-garrafa, #input-motivo-parada, #input-lote-preforma, #input-preforma {
+    height: 50px;
+    width: 100%;
+    max-width: 350px; 
+    text-align: center;
+    font-size: 20px;
+    box-sizing: border-box;
+  }
+
+.campo-grupo {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0px;
+}
+
+.campo-grupo label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+#select-turno {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #000;
+  border-radius: 12px;
+  background-color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.realizado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0px;
+}
+
+.realizado label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+#select-Linha {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #000;
+  border-radius: 12px;
+  background-color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#input-das, #input-ate {
+  height: 50px;
+  width: 100%;
+  max-width: 300px; 
+  text-align: center;
+  font-size: 20px;
+  box-sizing: border-box;
+  margin:auto
+}
+
+/* Agrupa os inputs de cada bloco (quantidade / motivo / horário) numa linha */
+.linha-info {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Mantém o label e o input de cada linha de horário lado a lado */
+.linha-horario {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.b-parada {
+    margin: 20px auto;
+    height: fit-content;           /* CORRIGIDO: Força a caixa bege a se ajustar à altura dos botões */
+    min-height: 200px;      /* Altura mínima segura caso tenha poucos botões */
+    width: 95%;
+    max-width: 1395px;
+    border-radius: 10px;
+    outline-style: outset;
+    background-color: antiquewhite;
+    padding: 25px;
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: center;
+    align-content: flex-start; /* CORRIGIDO: Alinha as linhas de botões de cima para baixo sem cortar */
+}
+
+#input-motivo-parada {
+    height: 50px;
+    width: 90%;
+    max-width: 400px; 
+    text-align: center;
+    font-size: 20px;
+    box-sizing: border-box;
+}
+
+.modal-refugo {
+            display: none; 
+            position: fixed; 
+            z-index: 9999; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.7); 
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-conteudo {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            font-family: Arial, sans-serif;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .modal-conteudo h2 {
+            color: #d9534f;
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .modal-btn {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .modal-btn:hover {
+            background-color: #c9302c;
+        }
+
+#input-refugo, #input-turno-refugo {
+    height: 30px;
+    width: 100%;
+    max-width: 400px; 
+    text-align: center;
+    font-size: 20px;
+    box-sizing: border-box;
+    margin: auto;
+}
