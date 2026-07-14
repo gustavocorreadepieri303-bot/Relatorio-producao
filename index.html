@@ -16,6 +16,23 @@
                 <input type="text" id="input-refugo-grf" name="quantidade_refugo_grf" min="0" required>
                 <label for="input-refugo">KG de Refugo Preforma:</label>
                 <input type="text" id="input-refugo-prf" name="quantidade_refugo_prf" min="0" required>
+                <label for="select-Linha-rfg">Linha:</label>
+                <select id="select-Linha-rfg" name="linha" required="">
+                    <option value="">-- Selecione a Linha --</option>
+                    <option value="Linha 1">Linha 1</option>
+                    <option value="Linha 2">Linha 2</option>
+                    <option value="Linha 3">Linha 3</option>
+                    <option value="Linha 4">Linha 4</option>
+                    <option value="Linha 5">Linha 5</option>
+                    <option value="Linha 6">Linha 6</option>
+                    <option value="Linha 7">Linha 7</option>
+                    <option value="Linha 8">Linha 8</option>
+                    <option value="Linha 9">Linha 9</option>
+                    <option value="Linha 10">Linha 10</option>
+                    <option value="Linha 11">Linha 11</option>
+                    <option value="Linha 12">Linha 12</option>
+                    <option value="Linha 14">Linha 14</option>
+                </select>
                 <label for="input-turno-refugo">Turno:</label>
                 <select id="input-turno-refugo" name="turno_refugo" required>
                     <option value="">-- Selecione o Turno --</option>
@@ -125,19 +142,19 @@
     function enviarRefugo(event) {
         event.preventDefault();
 
-        const linha       = document.getElementById('select-Linha').value;
+        const linha       = document.getElementById('select-Linha-rfg').value;
         const equipe      = document.getElementById('input-name').value;
         const kgRefugoGrf = document.getElementById('input-refugo-grf').value;
         const kgRefugoPrf = document.getElementById('input-refugo-prf').value; 
         const turno       = document.getElementById('input-turno-refugo').value;
 
         const corpo = new URLSearchParams();
-        corpo.append("tipo",               "refugo");
-        corpo.append("linha",              linha);
-        corpo.append("realizado_por",      equipe);
+        corpo.append("tipo",                   "refugo");
+        corpo.append("linha",                  linha);
+        corpo.append("realizado_por",          equipe);
         corpo.append("quantidade_refugo_grf",  kgRefugoGrf);
         corpo.append("quantidade_refugo_prf",  kgRefugoPrf);
-        corpo.append("turno_refugo",       turno);
+        corpo.append("turno_refugo",           turno);
 
         const botao = event.submitter;
         botao.innerText = "Enviando...";

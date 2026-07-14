@@ -352,7 +352,7 @@
             background-color: #c9302c;
         }
 
-#input-refugo, #input-turno-refugo {
+#input-refugo, #input-turno-refugo, #select-Linha-rfg {
     height: 30px;
     width: 100%;
     max-width: 400px; 
