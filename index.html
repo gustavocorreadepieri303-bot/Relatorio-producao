@@ -150,11 +150,11 @@
 
         const corpo = new URLSearchParams();
         corpo.append("tipo",                   "refugo");
-        corpo.append("linha",                  linha);
-        corpo.append("realizado_por",          equipe);
-        corpo.append("quantidade_refugo_grf",  kgRefugoGrf);
-        corpo.append("quantidade_refugo_prf",  kgRefugoPrf);
-        corpo.append("turno_refugo",           turno);
+        corpo.append("linha_refugo",            linha);
+        corpo.append("realizado_por",           equipe);
+        corpo.append("quantidade_refugo_grf",   kgRefugoGrf);
+        corpo.append("quantidade_refugo_prf",   kgRefugoPrf);
+        corpo.append("turno_refugo",            turno);
 
         const botao = event.submitter;
         botao.innerText = "Enviando...";
