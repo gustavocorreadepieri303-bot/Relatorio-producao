@@ -138,7 +138,7 @@
     width: 100%;
     max-width: 300px;
     min-width: 200px;
-    height: 70px;
+    height: 50px;
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
     outline-style: outset;
@@ -196,7 +196,7 @@
 #input-qntd-fardo, #input-qntd-p-fardo, #input-name, #input-garrafa, #input-motivo-parada, #input-lote-preforma, #input-preforma {
     height: 50px;
     width: 100%;
-    max-width: 350px; 
+    max-width: 200px; 
     text-align: center;
     font-size: 20px;
     box-sizing: border-box;
