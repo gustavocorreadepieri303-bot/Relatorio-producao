@@ -93,10 +93,6 @@
         </div>
 
         <div class="info-space">
-            <div id="grupo-quantidades" class="linha-info">
-                <input type="text" id="input-qntd-p-fardo" name="qntd-p-fardo" placeholder="Quantidade de Garrafas por Fardo" required="">
-                <input type="text" id="input-qntd-fardo" name="qntd-fardo" placeholder="Quantidade de Fardos Produzidos" required="">
-            </div>
             <div id="grupo-motivo-parada" class="linha-info" style="display:none;">
                 <input type="text" id="input-motivo-parada" name="motivo_parada_texto" readonly>
                 <input type="hidden" id="input-motivo-codigo" name="defeito_selected" value="">
@@ -107,6 +103,11 @@
                     <label for="input-das">Hor. Ínicio:</label>
                     <input type="time" id="input-das" name="hora_das" readonly required="">
                 </div>
+                <div id="grupo-quantidades" class="linha-info">
+                <input type="text" id="input-qntd-p-fardo" name="qntd-p-fardo" placeholder="Quantidade de Garrafas por Fardo" required="">
+                <input type="text" id="input-qntd-fardo" name="qntd-fardo" placeholder="Quantidade de Fardos Produzidos" required="">
+            </div>
+                <a href="selecionar_motivo.html" style="text-decoration: none;"><div class="back"><h1>Parada</h1></div></a>
                 <div class="linha-horario">
                     <label for="input-ate">Hor. Final:</label>
                     <input type="time" id="input-ate" name="hora_ate" required="">
@@ -116,7 +117,6 @@
 
         <div class="b-space">
             <button type="button" class="back" onclick="abrirModalRefugo()"><h1>Refugos</h1></button>
-            <a href="selecionar_motivo.html" style="text-decoration: none;"><div class="back"><h1>Parada</h1></div></a>
             <button type="submit" class="send">Enviar</button>
         </div>
     </form>

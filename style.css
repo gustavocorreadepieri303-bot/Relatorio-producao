@@ -133,11 +133,11 @@
     box-sizing: border-box;
 }
 
-/*botão voltar*/
 .back {
     margin: 0; 
     width: 100%;
     max-width: 300px;
+    min-width: 200px;
     height: 70px;
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
