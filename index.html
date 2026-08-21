@@ -318,65 +318,71 @@
     // ===================================================================
     // ENVIO DE PRODUÇÃO PARA A PLANILHA
     // ===================================================================
-    function enviarParaPlanilha(event) {
-        event.preventDefault();
+    async function enviarParaPlanilha(event) {
+    event.preventDefault();
 
-        const linha        = document.getElementById('select-Linha').value;
-        const turno        = document.getElementById('select-turno').value;
-        const realizadoPor = document.getElementById('input-name').value;
-        const garrafa      = document.getElementById('input-garrafa').value;
-        const lotePreforma = document.getElementById('input-lote-preforma').value;
-        const horasDas     = document.getElementById('input-das').value;
-        const horasAte     = document.getElementById('input-ate').value;
-        const qntdFardo    = document.getElementById('input-qntd-fardo').value;
-        const qntdPFardo   = document.getElementById('input-qntd-p-fardo').value;
-        const codigoParada = document.getElementById('input-motivo-codigo').value;
-        const preforma     = document.getElementById('input-preforma').value;
+    const linha        = document.getElementById('select-Linha').value;
+    const turno        = document.getElementById('select-turno').value;
+    const realizadoPor = document.getElementById('input-name').value;
+    const garrafa      = document.getElementById('input-garrafa').value;
+    const lotePreforma = document.getElementById('input-lote-preforma').value;
+    const horasDas     = document.getElementById('input-das').value;
+    const horasAte     = document.getElementById('input-ate').value;
+    const qntdFardo    = document.getElementById('input-qntd-fardo').value;
+    const qntdPFardo   = document.getElementById('input-qntd-p-fardo').value;
+    const codigoParada = document.getElementById('input-motivo-codigo').value;
+    const preforma     = document.getElementById('input-preforma').value;
 
-        if (!linha || !turno || !realizadoPor || !horasDas || !horasAte) {
-            alert("Preencha todos os campos obrigatórios.");
-            return;
-        }
+    if (!linha || !turno || !realizadoPor || !horasDas || !horasAte) {
+        alert("Preencha todos os campos obrigatórios.");
+        return;
+    }
 
-        const corpo = new URLSearchParams();
-        corpo.append("tipo",             "producao");
-        corpo.append("linha",            linha);
-        corpo.append("turno_trabalho",  turno);
-        corpo.append("realizado_por",   realizadoPor);
-        corpo.append("nome_garrafa",    garrafa);
-        corpo.append("lote_preforma",   lotePreforma); // Este é o lote real!
-        corpo.append("preforma",        preforma);     // <-- LINHA ADICIONADA: Agora o número da preforma é enviado!
-        corpo.append("hora_das",        horasDas);
-        corpo.append("hora_ate",        horasAte);
-        corpo.append("qntd-fardo",      qntdFardo);
-        corpo.append("qntd-p-fardo",    qntdPFardo);
-        corpo.append("defeito_selected", codigoParada);
+    const corpo = new URLSearchParams({
+        tipo:             "producao",
+        linha:            linha,
+        turno_trabalho:   turno,
+        realizado_por:    realizadoPor,
+        nome_garrafa:     garrafa,
+        lote_preforma:    lotePreforma,
+        preforma:         preforma,
+        hora_das:         horasDas,
+        hora_ate:         horasAte,
+        "qntd-fardo":     qntdFardo,
+        "qntd-p-fardo":   qntdPFardo,
+        defeito_selected: codigoParada
+    });
 
-        const botao = document.querySelector('.send');
-        botao.innerText = "Enviando...";
-        botao.disabled = true;
+    const botao = document.querySelector('.send');
+    botao.innerText = "Enviando...";
+    botao.disabled = true;
 
-        fetch(URL_SCRIPT, {
+    try {
+        await fetch(URL_SCRIPT, {
             method: 'POST',
-            mode: 'no-cors',
+            mode: 'no-cors', // Mantido para Google Apps Script
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: corpo.toString()
-        })
-        .then(() => {
-            alert("Registrado com sucesso!");
-            avancarHorarioAposEnvio();
-            if (codigoParada) {
-                document.getElementById('btn-limpar-motivo').click();
-            }
-            botao.innerText = "Enviar";
-            botao.disabled = false;
-        })
-        .catch(() => {
-            alert("Erro de conexão. Tente novamente.");
-            botao.innerText = "Enviar";
-            botao.disabled = false;
         });
+
+        // 1. Executa tarefas de limpeza/atualização
+        avancarHorarioAposEnvio();
+        if (codigoParada) {
+            document.getElementById('btn-limpar-motivo').click();
+        }
+
+        // 2. Notifica o usuário (o código PAUSA aqui até o usuário clicar em OK)
+        alert("Registrado com sucesso!");
+
+        // 3. Recarrega a página SOMENTE após a resposta e o clique no OK do alert
+        window.location.reload();
+
+    } catch (error) {
+        alert("Erro de conexão. Tente novamente.");
+        botao.innerText = "Enviar";
+        botao.disabled = false;
     }
+}
 </script>
 
 </body>
