@@ -86,6 +86,11 @@
             <input type="text" id="input-garrafa" name="input-garrafa" placeholder="Nome da garrafa" required="">
             <input type="text" id="input-preforma" name="quantidade_preforma" placeholder="Número da Preforma" required="">
             <input type="text" id="input-lote-preforma" name="input-lote-preforma" placeholder="Lote da preforma" required="">
+            <div class="data">
+                <label for="input-data">Data:</label>
+                <input type="date" id="input-data" name="data" required="">
+            </div>
+            
             <div class="realizado">
                 <label for="realizado_por">Realizado Por:</label>
                 <input type="text" id="input-name" name="realizado_por" placeholder="Equipe. Ex: A1" required="">
@@ -122,6 +127,33 @@
     </form>
 
 <script>
+
+    function atualizarDataOperacional() {
+    const selectTurno = document.getElementById('select-turno');
+    const inputData   = document.getElementById('input-data');
+
+    if (!selectTurno || !inputData) return;
+
+    const turno = selectTurno.value.toUpperCase().trim();
+    const agora = new Date();
+
+    // Se for turno noturno (C ou D) e a hora atual for entre 00:00 e 04:59 da manhã
+    if ((turno === "C" || turno === "D" || turno.includes("C") || turno.includes("D")) && agora.getHours() < 5) {
+        agora.setDate(agora.getDate() - 1); // Pertence ao dia anterior
+    }
+
+    // Formata no padrão 'YYYY-MM-DD' exigido pelo <input type="date">
+    const ano = agora.getFullYear();
+    const mes = String(agora.getMonth() + 1).padStart(2, '0');
+    const dia = String(agora.getDate()).padStart(2, '0');
+
+    inputData.value = `${ano}-${mes}-${dia}`;
+}
+
+    // Event Listeners
+    document.getElementById('select-turno').addEventListener('change', atualizarDataOperacional);
+    document.addEventListener('DOMContentLoaded', atualizarDataOperacional);
+
     // ===================================================================
     // ⚠️ AJUSTE AQUI: URL do Apps Script publicado
     // ===================================================================
@@ -233,7 +265,8 @@
         "input-ate",
         "input-motivo-parada",
         "input-motivo-codigo",
-        "input-preforma"
+        "input-preforma",
+        "input-data"
         
     ];
 
@@ -332,8 +365,9 @@
     const qntdPFardo   = document.getElementById('input-qntd-p-fardo').value;
     const codigoParada = document.getElementById('input-motivo-codigo').value;
     const preforma     = document.getElementById('input-preforma').value;
+    const data         = document.getElementById('input-data').value;
 
-    if (!linha || !turno || !realizadoPor || !horasDas || !horasAte) {
+    if (!linha || !turno || !realizadoPor || !horasDas || !horasAte || !data    ) {
         alert("Preencha todos os campos obrigatórios.");
         return;
     }
@@ -350,7 +384,8 @@
         hora_ate:         horasAte,
         "qntd-fardo":     qntdFardo,
         "qntd-p-fardo":   qntdPFardo,
-        defeito_selected: codigoParada
+        defeito_selected: codigoParada,
+        data:             data
     });
 
     const botao = document.querySelector('.send');
