@@ -179,6 +179,8 @@
         const kgRefugoGrf = document.getElementById('input-refugo-grf').value;
         const kgRefugoPrf = document.getElementById('input-refugo-prf').value; 
         const turno       = document.getElementById('input-turno-refugo').value;
+        // Pega a data preenchida no campo 'input-data' do formulário principal
+        const dataRefugo  = document.getElementById('input-data').value;
 
         const corpo = new URLSearchParams();
         corpo.append("tipo",                   "refugo");
@@ -187,6 +189,7 @@
         corpo.append("quantidade_refugo_grf",   kgRefugoGrf);
         corpo.append("quantidade_refugo_prf",   kgRefugoPrf);
         corpo.append("turno_refugo",            turno);
+        corpo.append("data",                    dataRefugo); // <--- ENVIA A DATA SELECIONADA
 
         const botao = event.submitter;
         botao.innerText = "Enviando...";
