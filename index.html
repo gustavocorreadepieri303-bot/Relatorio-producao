@@ -112,7 +112,9 @@
                 <input type="text" id="input-qntd-p-fardo" name="qntd-p-fardo" placeholder="Qntd. grfs p/ Fardo" required="">
                 <input type="text" id="input-qntd-fardo" name="qntd-fardo" placeholder="Qntd. fardos prod." required="">
             </div>
-                <a href="selecionar_motivo.html" style="text-decoration: none;"><div class="parada"><h2>Parada</h2></div></a>
+                <div class="parada" onclick="validarEIrParaParada()" style="cursor: pointer;">
+                    <h2>Parada</h2>
+                </div>
                 <div class="linha-horario">
                     <label for="input-ate">Hor. Final:</label>
                     <input type="time" id="input-ate" name="hora_ate" required="">
@@ -127,6 +129,19 @@
     </form>
 
 <script>
+
+    function validarEIrParaParada() {
+    const qntdFardo = document.getElementById('input-qntd-fardo').value.trim();
+
+    // Se houver algum valor digitado na quantidade de fardos
+    if (qntdFardo !== "") {
+        alert("Envie a produção atual antes de registrar uma parada");
+        return;
+    }
+
+    // Se estiver vazio, permite a navegação para a página de paradas
+    window.location.href = "selecionar_motivo.html";
+}
 
     function atualizarDataOperacional() {
     const selectTurno = document.getElementById('select-turno');
